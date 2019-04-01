@@ -1,9 +1,11 @@
 import React from "react";
-import Deck from "./Deck";
+import {Link} from "react-router-dom";
+// import Deck from "./Deck";
 
 class Decks extends React.Component{
     render(){
         const decks = this.props.decks;
+        console.log(decks);
         const deckIds = Object.keys(decks);
         
         if(deckIds.length<1){return (
@@ -15,7 +17,15 @@ class Decks extends React.Component{
         return (
             <div className="decks-wrap">          
                 {deckIds.map(function(deckId){
-                    return(<Deck key={deckId} cards={decks[deckId]}></Deck>)
+                    let deck=decks[deckId];
+                    return  (
+                        <Link to="./decks" key={deckId}>
+                            <div key={deckId} className="deck">
+                                <h3>{deck.title}</h3>
+                                <p>{deck.description}</p>
+                            </div>
+                        </Link>
+                    )
                 })}
             </div>
         )

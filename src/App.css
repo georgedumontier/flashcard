@@ -1,33 +1,91 @@
+:root {
+  font-size: 62.5%;
+}
+html,
+body {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 600px;
+  font-size: 1.6rem;
+}
 .App {
+  position: relative;
+}
+.deck {
+  padding: 5rem;
+  border: 3px solid gray;
+  margin-bottom: 2rem;
+}
+.deck h3 {
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.deck p {
+  text-align: center;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+a {
+  text-decoration: none;
+  color: black;
+}
+.button-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: right;
+}
+.create-deck {
+  background: white;
+  border: 2px solid black;
+  margin-bottom: 3rem;
+  margin-right: 3rem;
+  padding: 2rem;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+.create-deck:hover {
+  background: black;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.and-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  color: black;
+  background: white;
+  text-align: center;
+  line-height: 3rem;
+  cursor: pointer;
+}
+.and-close-button:hover {
+  background: black;
+  color: white;
+}
+/* TRANSITIONS */
+.add-new-deck,
+.close-new-deck {
+  padding: 2rem;
+  border: 3px solid gray;
+  transition: 0.3s all;
+  position: absolute;
+  width: 85%;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background: white;
+  box-sizing: border-box;
+  transform: translateX(120%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.add-new-deck-enter {
+  transform: translateX(0);
+}
+.add-new-deck-enter-active {
+  transform: translateX(0);
+}
+.add-new-deck-enter-done {
+  transform: translateX(0);
 }
