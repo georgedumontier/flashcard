@@ -18,6 +18,12 @@ h3 {
   padding: 5rem;
   border: 3px solid gray;
   margin-bottom: 2rem;
+  cursor: pointer;
+}
+.deck:hover {
+  box-shadow: 1px 3px 3px slategray;
+  transform: translateY(-1px);
+  transform: translateX(-1px);
 }
 .deck h3 {
   text-align: center;
@@ -101,6 +107,41 @@ form.deck.new-deck-enter-done {
   display: block;
   max-height: 1000px;
   padding: 5rem;
+}
+
+/* DECK.JS StYLES */
+.card {
+  width: 100%;
+  border: 2px solid gray;
+  box-shadow: 1px 2px 2px gray;
+  font-size: 2.4rem;
+  min-height: 250px;
+  position: relative;
+  margin: 5px;
+  transition: 0.5s all;
+}
+.cardIsFlipped {
+  transform: rotateY(180deg);
+}
+.cardIsFlipped > .back-side {
+  z-index: 3;
+}
+.front-side {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 25%;
+  background: white;
+  z-index: 2;
+}
+.back-side {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 25%;
+  transform: rotateY(180deg);
+  background: white;
+  z-index: 1;
 }
 
 /* TRANSITIONS */

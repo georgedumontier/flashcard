@@ -1,57 +1,69 @@
-import React, { Component } from 'react';
-import '../App.css';
+import React, { Component } from "react";
+import "../App.css";
 import Decks from "./Decks";
 // import AddNewDeck from "./AddNewDeck";
 
 class App extends Component {
   state = {
-    showNewDeck:false,
-    decks:[
+    showNewDeck: false,
+    decks: [
       {
-        title:"Deck 1",
-        description:"This is your first deck of flashcards!",
-        cards:{
-          card1:["front side","back side"],
-          card2:["front side","back side"]
+        title: "Deck 1",
+        description: "This is your first deck of flashcards!",
+        cards: {
+          card1: ["front side", "back side"],
+          card2: ["front side", "back side"]
         }
       },
       {
-        title:"Deck 2",
-        description:"This is your second deck of flashcards!",
-        cards:{
-          card1:["front side","back side"],
-          card2:["front side","back side"]
+        title: "Deck 2",
+        description: "This is your second deck of flashcards!",
+        cards: {
+          card1: ["front side", "back side"],
+          card2: ["front side", "back side"]
         }
       }
     ]
-  }
-  
+  };
+
   addDeck = (title, description) => {
     let decks = this.state.decks;
     decks.push({
-      title:title,
-      description:description,
-      cards:{}
-    })
-    this.setState({decks,showNewDeck:false})
-  }
+      title: title,
+      description: description,
+      cards: {}
+    });
+    this.setState({ decks, showNewDeck: false });
+  };
 
-  showNewDeck = ()=> {
+  showNewDeck = () => {
     this.setState({
-      showNewDeck:true
-    });  
-  }
-  hideNewDeck = ()=> {
+      showNewDeck: true
+    });
+  };
+  hideNewDeck = () => {
     this.setState({
-      showNewDeck:false
-    });  
-  }
+      showNewDeck: false
+    });
+  };
   render() {
     return (
       <div className="App">
-        <Decks decks={this.state.decks} addDeck={this.addDeck} showNewDeck={this.state.showNewDeck}></Decks>
-        <div className="button-wrapper"><button className="create-deck" onClick={()=>{this.showNewDeck()}}>+ New Deck</button></div>
-        {/* <AddNewDeck hideNewDeck={this.hideNewDeck} inProp={this.state.showNewDeck}></AddNewDeck> */}
+        <Decks
+          decks={this.state.decks}
+          addDeck={this.addDeck}
+          showNewDeck={this.state.showNewDeck}
+        />
+        <div className="button-wrapper">
+          <button
+            className="create-deck"
+            onClick={() => {
+              this.showNewDeck();
+            }}
+          >
+            + New Deck
+          </button>
+        </div>
       </div>
     );
   }
