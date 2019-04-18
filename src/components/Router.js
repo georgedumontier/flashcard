@@ -13,7 +13,8 @@ const Router = () => (
       <Route
         exact
         path="/app/:deckId"
-        render={props => <Deck deck={props.location.state.deck} {...props} />}
+        // render={props => <Deck deck={props.location.state.deck} {...props} />}
+        render={props => <Deck {...props} />}
       />
       <Route component={NotFound} />
     </Switch>

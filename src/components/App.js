@@ -19,8 +19,11 @@ class App extends Component {
         title: "Deck 2",
         description: "This is your second deck of flashcards!",
         cards: {
-          card1: ["front side", "back side"],
-          card2: ["front side", "back side"]
+          card1: ["front side of card 1", "back side of card 1"],
+          card2: ["front side of card 2", "back side of card 2"],
+          card3: ["front side of card 3", "back side of card 3"],
+          card4: ["front side of card 4", "back side of card 4"],
+          card5: ["front side of card 5", "back side of card 5"]
         }
       }
     ]
