@@ -31,8 +31,14 @@ class Deck extends React.Component {
       cardIsFlipped
     });
   };
+  hideNewCard = () => {
+    this.setState({
+      showNewCard: false
+    });
+  };
   render() {
-    const deck = this.props.location.state.deck;
+    let deckId = this.props.match.params.deckId;
+    let deck = this.props.decks[deckId];
     if (this.state.currentCard === Object.keys(deck.cards).length + 1) {
       return (
         <div className="results">
@@ -88,29 +94,16 @@ class Deck extends React.Component {
             Edit
           </button>
         </div>
-        <AddNewCard inProp={this.state.showNewCard} />
+        <AddNewCard
+          inProp={this.state.showNewCard}
+          hideNewCard={this.hideNewCard}
+          editCards={this.props.editCards}
+          deck={this.props.decks[this.props.match.params.deckId]}
+          deckId={this.props.match.params.deckId}
+        />
       </div>
     );
   }
 }
 
 export default Deck;
-
-// {cards.map((card, i) => {
-//     return (
-//       <div
-//         className={`card ${
-//           this.state.cardIsFlipped ? "cardIsFlipped" : ""
-//         }`}
-//         key={i}
-//         onClick={() => this.flipCard()}
-//       >
-//         <div className="front-side">
-//           {this.props.deck.cards[card][0]}
-//         </div>
-//         <div className="back-side">
-//           {this.props.deck.cards[card][1]}
-//         </div>
-//       </div>
-//     );
-//   })}

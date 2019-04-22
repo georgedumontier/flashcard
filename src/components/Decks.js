@@ -17,6 +17,7 @@ class Decks extends React.Component {
     let value = e.target.value;
     this.setState({ [target]: value });
   };
+
   render() {
     const decks = this.props.decks;
     const deckIds = Object.keys(decks);
@@ -76,6 +77,16 @@ class Decks extends React.Component {
             </Link>
           );
         })}
+        <div className="button-wrapper">
+          <button
+            className="create-deck"
+            onClick={() => {
+              this.props.toggleNewDeck();
+            }}
+          >
+            + New Deck
+          </button>
+        </div>
       </div>
     );
   }

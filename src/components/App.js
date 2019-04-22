@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../App.css";
 import Decks from "./Decks";
+import { BrowserRouter, Route } from "react-router-dom";
+import Deck from "./Deck";
 // import AddNewDeck from "./AddNewDeck";
 
 class App extends Component {
   state = {
+    testProp: false,
     showNewDeck: false,
     decks: [
       {
@@ -39,35 +42,50 @@ class App extends Component {
     this.setState({ decks, showNewDeck: false });
   };
 
-  showNewDeck = () => {
+  toggleNewDeck = () => {
+    let showNewDeck = !this.state.showNewDeck;
     this.setState({
-      showNewDeck: true
+      showNewDeck
     });
   };
-  hideNewDeck = () => {
+  editCards = (thisDeck, thisTarget, thisValue) => {
+    let decks = this.state.decks;
+    decks[thisDeck][thisTarget] = thisValue;
     this.setState({
-      showNewDeck: false
+      decks
     });
   };
   render() {
     return (
-      <div className="App">
-        <Decks
-          decks={this.state.decks}
-          addDeck={this.addDeck}
-          showNewDeck={this.state.showNewDeck}
-        />
-        <div className="button-wrapper">
-          <button
-            className="create-deck"
-            onClick={() => {
-              this.showNewDeck();
-            }}
-          >
-            + New Deck
-          </button>
+      <BrowserRouter>
+        <div className="App">
+          <h1>Flashcards are awesome!</h1>
+          <Route
+            exact
+            path="/app"
+            render={props => (
+              <Decks
+                decks={this.state.decks}
+                addDeck={this.addDeck}
+                showNewDeck={this.state.showNewDeck}
+                editCards={this.editCards}
+                toggleNewDeck={this.toggleNewDeck}
+              />
+            )}
+          />
+          <Route
+            path="/app/:deckId"
+            // render={props => <Deck deck={props.location.state.deck} {...props} />}
+            render={props => (
+              <Deck
+                editCards={this.editCards}
+                decks={this.state.decks}
+                {...props}
+              />
+            )}
+          />
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
