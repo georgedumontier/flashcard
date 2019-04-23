@@ -49,7 +49,7 @@ class Deck extends React.Component {
 
     return (
       <div className="deck-view-container">
-        <h3>{deck.title}</h3>
+        <h2>{deck.title}</h2>
         <TransitionGroup component={null}>
           <CSSTransition
             timeout={300}

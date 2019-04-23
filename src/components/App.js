@@ -48,9 +48,16 @@ class App extends Component {
       showNewDeck
     });
   };
-  editCards = (thisDeck, thisTarget, thisValue) => {
+  editCards = (thisDeck, thisTarget, thisValue, side) => {
     let decks = this.state.decks;
-    decks[thisDeck][thisTarget] = thisValue;
+
+    console.log("thisDeck:" + thisDeck);
+    console.log("thisTarget:" + thisTarget);
+    console.log("thisValue:" + thisValue);
+    side
+      ? (decks[thisDeck]["cards"][thisTarget][side] = thisValue)
+      : (decks[thisDeck][thisTarget] = thisValue);
+    // decks[thisDeck]["cards"][thisTarget] = thisValue;
     this.setState({
       decks
     });
