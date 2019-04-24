@@ -16,7 +16,6 @@ class Deck extends React.Component {
   };
   flipCard = () => {
     let cardIsFlipped = !this.state.cardIsFlipped;
-    console.log(cardIsFlipped);
     this.setState({
       cardIsFlipped
     });
@@ -39,6 +38,36 @@ class Deck extends React.Component {
   render() {
     let deckId = this.props.match.params.deckId;
     let deck = this.props.decks[deckId];
+    if (!deck.cards) {
+      console.log(this.state.showNewCard);
+      console.log(this.hideNewCard);
+      console.log(this.props.editCards);
+      console.log(this.props.decks[this.props.match.params.deckId]);
+      console.log(this.props.match.params.deckId);
+      return (
+        <div className="no-cards">
+          <p>No cards have been added to this deck.</p>
+          <div className="button-wrapper">
+            <button
+              className="add-new-card-button"
+              onClick={() => {
+                this.setState({ showNewCard: true });
+              }}
+            >
+              <FontAwesomeIcon icon={faPencilAlt} />
+              Edit
+            </button>
+          </div>
+          <AddNewCard
+            inProp={this.state.showNewCard}
+            hideNewCard={this.hideNewCard}
+            editCards={this.props.editCards}
+            deck={this.props.decks[this.props.match.params.deckId]}
+            deckId={this.props.match.params.deckId}
+          />
+        </div>
+      );
+    }
     if (this.state.currentCard === Object.keys(deck.cards).length + 1) {
       return (
         <div className="results">

@@ -3,10 +3,12 @@ import "../App.css";
 import Decks from "./Decks";
 import { BrowserRouter, Route } from "react-router-dom";
 import Deck from "./Deck";
+import base from "../base";
 // import AddNewDeck from "./AddNewDeck";
 
 class App extends Component {
   state = {
+    user: "",
     testProp: false,
     showNewDeck: false,
     decks: [
@@ -31,14 +33,27 @@ class App extends Component {
       }
     ]
   };
+  componentDidMount() {
+    //   //check if logged in
+    let user = this.props.match.params.user;
+    this.ref = base.syncState(user, {
+      context: this,
+      state: "decks"
+    });
+    this.setState({
+      user
+    });
+  }
 
   addDeck = (title, description) => {
     let decks = this.state.decks;
-    decks.push({
+    let deckNum = Object.keys(decks).length;
+    console.log(deckNum);
+    decks[deckNum] = {
       title: title,
       description: description,
-      cards: {}
-    });
+      cards: { card1: ["front", "back"] }
+    };
     this.setState({ decks, showNewDeck: false });
   };
 
@@ -48,16 +63,14 @@ class App extends Component {
       showNewDeck
     });
   };
-  editCards = (thisDeck, thisTarget, thisValue, side) => {
+  editCards = (thisDeck, thisTarget, thisValue, side, newCard) => {
     let decks = this.state.decks;
-
-    console.log("thisDeck:" + thisDeck);
-    console.log("thisTarget:" + thisTarget);
-    console.log("thisValue:" + thisValue);
+    if (newCard) {
+      decks[thisDeck]["cards"][thisTarget] = [];
+    }
     side
       ? (decks[thisDeck]["cards"][thisTarget][side] = thisValue)
       : (decks[thisDeck][thisTarget] = thisValue);
-    // decks[thisDeck]["cards"][thisTarget] = thisValue;
     this.setState({
       decks
     });
@@ -69,7 +82,7 @@ class App extends Component {
           <h1>Flashcards are awesome!</h1>
           <Route
             exact
-            path="/app"
+            path="/:user"
             render={props => (
               <Decks
                 decks={this.state.decks}
@@ -77,16 +90,18 @@ class App extends Component {
                 showNewDeck={this.state.showNewDeck}
                 editCards={this.editCards}
                 toggleNewDeck={this.toggleNewDeck}
+                user={this.state.user}
               />
             )}
           />
           <Route
-            path="/app/:deckId"
+            path="/:user/:deckId"
             // render={props => <Deck deck={props.location.state.deck} {...props} />}
             render={props => (
               <Deck
                 editCards={this.editCards}
                 decks={this.state.decks}
+                user={this.state.user}
                 {...props}
               />
             )}

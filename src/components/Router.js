@@ -14,7 +14,7 @@ const Router = () => (
         // render={props => <Deck deck={props.location.state.deck} {...props} />}
         render={props => <Deck {...props} />}
       /> */}
-      <Route path="/app" component={App} />
+      <Route path="/:user/" component={App} />
 
       <Route component={NotFound} />
     </Switch>

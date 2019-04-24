@@ -4,6 +4,10 @@ import { CSSTransition } from "react-transition-group";
 // import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 class AddNewCard extends React.Component {
+  state = {
+    0: "",
+    1: ""
+  };
   handleCardChange = e => {
     let thisDeck = this.props.deckId;
     let thisTarget = e.currentTarget.name;
@@ -17,6 +21,28 @@ class AddNewCard extends React.Component {
     let thisValue = e.currentTarget.value;
 
     this.props.editCards(thisDeck, thisTarget, thisValue);
+  };
+  handleNewCardChange = e => {
+    let side = e.currentTarget.dataset.side;
+    let value = e.currentTarget.value;
+    this.setState({
+      [side]: value
+    });
+  };
+  createCard = e => {
+    let thisDeck = this.props.deckId;
+    let thisTarget = e.currentTarget.name;
+    let thisValue = e.currentTarget.value;
+    let side = e.currentTarget.dataset.side;
+    this.props.editCards(thisDeck, thisTarget, thisValue, side);
+  };
+  submitNewCard = e => {
+    e.preventDefault();
+    let thisTarget =
+      "card" + (parseInt(Object.keys(this.props.deck.cards).length) + 1);
+    let thisDeck = this.props.deckId;
+    this.props.editCards(thisDeck, thisTarget, "", "0", true);
+    this.props.editCards(thisDeck, thisTarget, "", "1", false);
   };
   render() {
     return (
@@ -48,9 +74,7 @@ class AddNewCard extends React.Component {
                 value={this.props.deck.description}
                 onChange={this.handleChange}
               />
-              {Object.keys(this.props.deck.cards).map((card, i) => {
-                // let frontName = { card };
-                // let backName = { card };
+              {/* {Object.keys(this.props.deck.cards).map((card, i) => {
                 return (
                   <div className="and-card" key={card}>
                     <h4>Card {i + 1} </h4>
@@ -72,8 +96,11 @@ class AddNewCard extends React.Component {
                     />
                   </div>
                 );
-              })}
+              })} */}
             </form>
+            <button className="new-card-button" onClick={this.submitNewCard}>
+              + Card
+            </button>
 
             <div
               className="and-close-button"

@@ -44,6 +44,7 @@ h3 {
 .App {
   position: relative;
   min-height: calc(100vh - 6rem);
+  height: 100%;
   padding: 3rem;
   font-weight: 300;
   font-size: 2rem;
@@ -74,7 +75,7 @@ a {
   color: black;
 }
 .button-wrapper {
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   max-width: 600px;
@@ -84,7 +85,8 @@ a {
   right: 0;
 }
 .create-deck,
-.add-new-card-button {
+.add-new-card-button,
+.new-card-button {
   background: var(--gradient);
   border: 2px solid var(--black);
   margin-top: 1rem;
@@ -93,6 +95,12 @@ a {
   padding: 1rem;
   cursor: pointer;
   font-size: 1.8rem;
+}
+.new-card-button {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 .create-deck:hover,
 .add-new-card-button:hover {
@@ -235,12 +243,13 @@ form.deck.new-deck-enter-done {
   max-height: 100vh;
   overflow: hidden;
   width: 100%;
+  height: 100%;
 }
 .and-spacer {
   width: 15%;
   position: absolute;
   left: 0;
-  height: 100vh;
+  height: 100%;
 }
 .add-new-card,
 .close-new-card {
@@ -250,7 +259,7 @@ form.deck.new-deck-enter-done {
   background: white;
   box-sizing: border-box;
   /* height: 100%; */
-
+  min-height: 100vh;
   position: absolute;
   right: 0;
 }
@@ -271,6 +280,7 @@ form.deck.new-deck-enter-done {
 .deck-view-container {
   /* position: relative; */
   padding: 5px;
+  height: 100%;
 }
 .deck-view {
   transition: 0.3s all;
