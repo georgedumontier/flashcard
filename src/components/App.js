@@ -11,30 +11,11 @@ class App extends Component {
     user: "",
     testProp: false,
     showNewDeck: false,
-    decks: [
-      {
-        title: "Deck 1",
-        description: "This is your first deck of flashcards!",
-        cards: {
-          card1: ["front side", "back side"],
-          card2: ["front side", "back side"]
-        }
-      },
-      {
-        title: "Deck 2",
-        description: "This is your second deck of flashcards!",
-        cards: {
-          card1: ["front side of card 1", "back side of card 1"],
-          card2: ["front side of card 2", "back side of card 2"],
-          card3: ["front side of card 3", "back side of card 3"],
-          card4: ["front side of card 4", "back side of card 4"],
-          card5: ["front side of card 5", "back side of card 5"]
-        }
-      }
-    ]
+    decks: []
   };
   componentDidMount() {
     //   //check if logged in
+    console.log("component mounted");
     let user = this.props.match.params.user;
     this.ref = base.syncState(user, {
       context: this,
@@ -46,14 +27,12 @@ class App extends Component {
   }
 
   addDeck = (title, description) => {
-    let decks = this.state.decks;
-    let deckNum = Object.keys(decks).length;
-    console.log(deckNum);
-    decks[deckNum] = {
+    let decks = Array.from(this.state.decks);
+    decks.push({
       title: title,
       description: description,
-      cards: { card1: ["front", "back"] }
-    };
+      cards: null
+    });
     this.setState({ decks, showNewDeck: false });
   };
 
@@ -66,11 +45,17 @@ class App extends Component {
   editCards = (thisDeck, thisTarget, thisValue, side, newCard) => {
     let decks = this.state.decks;
     if (newCard) {
+      if (!decks[thisDeck]["cards"]) {
+        console.log("this returned like there was no cards");
+        decks[thisDeck]["cards"] = [];
+      }
       decks[thisDeck]["cards"][thisTarget] = [];
+      decks[thisDeck]["cards"][thisTarget].push(thisValue[0], thisValue[1]);
+    } else {
+      side
+        ? (decks[thisDeck]["cards"][thisTarget][side] = thisValue)
+        : (decks[thisDeck][thisTarget] = thisValue);
     }
-    side
-      ? (decks[thisDeck]["cards"][thisTarget][side] = thisValue)
-      : (decks[thisDeck][thisTarget] = thisValue);
     this.setState({
       decks
     });

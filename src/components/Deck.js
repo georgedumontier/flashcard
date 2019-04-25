@@ -12,7 +12,7 @@ class Deck extends React.Component {
   state = {
     showNewCard: false,
     cardIsFlipped: false,
-    currentCard: 1
+    currentCard: 0
   };
   flipCard = () => {
     let cardIsFlipped = !this.state.cardIsFlipped;
@@ -38,6 +38,9 @@ class Deck extends React.Component {
   render() {
     let deckId = this.props.match.params.deckId;
     let deck = this.props.decks[deckId];
+    if (!deck) {
+      return <p>loading...</p>;
+    }
     if (!deck.cards) {
       console.log(this.state.showNewCard);
       console.log(this.hideNewCard);
@@ -68,7 +71,7 @@ class Deck extends React.Component {
         </div>
       );
     }
-    if (this.state.currentCard === Object.keys(deck.cards).length + 1) {
+    if (this.state.currentCard === deck.cards.length) {
       return (
         <div className="results">
           <h1>These are your results: You fail!</h1>
@@ -93,11 +96,12 @@ class Deck extends React.Component {
                   this.state.cardIsFlipped ? "cardIsFlipped" : ""
                 }`}
               >
+                {console.log(deck)}
                 <div className="front-side" onClick={() => this.flipCard()}>
-                  <h3>{deck.cards[`card${this.state.currentCard}`][0]}</h3>
+                  <h3>{deck.cards[`${this.state.currentCard}`][0]}</h3>
                 </div>
                 <div className="back-side">
-                  <h3>{deck.cards[`card${this.state.currentCard}`][1]}</h3>
+                  <h3>{deck.cards[`${this.state.currentCard}`][1]}</h3>
                   <button
                     className="correct"
                     onClick={() => this.answered("right")}

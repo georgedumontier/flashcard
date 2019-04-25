@@ -19,7 +19,6 @@ class AddNewCard extends React.Component {
     let thisDeck = this.props.deckId;
     let thisTarget = e.currentTarget.name;
     let thisValue = e.currentTarget.value;
-
     this.props.editCards(thisDeck, thisTarget, thisValue);
   };
   handleNewCardChange = e => {
@@ -38,13 +37,47 @@ class AddNewCard extends React.Component {
   };
   submitNewCard = e => {
     e.preventDefault();
-    let thisTarget =
-      "card" + (parseInt(Object.keys(this.props.deck.cards).length) + 1);
+    let thisTarget;
+    if (!this.props.deck.cards) {
+      thisTarget = 0;
+    } else {
+      thisTarget = this.props.deck.cards.length;
+    }
     let thisDeck = this.props.deckId;
-    this.props.editCards(thisDeck, thisTarget, "", "0", true);
-    this.props.editCards(thisDeck, thisTarget, "", "1", false);
+    this.props.editCards(thisDeck, thisTarget, [" ", " "], "0", true);
+    //this.props.editCards(thisDeck, thisTarget, "", "1", false);
   };
   render() {
+    let cardList;
+    console.log(this.props.deck);
+    if (!this.props.deck.cards) {
+      cardList = <div>There are no cards in this deck</div>;
+    } else
+      cardList = this.props.deck.cards.map((card, i) => {
+        console.log(card);
+        return (
+          <div className="and-card" key={i}>
+            <h4>Card {i + 1} </h4>
+            <label>Front:</label>
+            <input
+              type="text"
+              name={i}
+              value={this.props.deck.cards[i][0]}
+              onChange={this.handleCardChange}
+              data-side="0"
+            />
+            <label> Back: </label>
+            <input
+              type="text"
+              name={i}
+              value={this.props.deck.cards[i][1]}
+              onChange={this.handleCardChange}
+              data-side="1"
+            />
+          </div>
+        );
+      });
+
     return (
       <CSSTransition
         in={this.props.inProp}
@@ -74,29 +107,7 @@ class AddNewCard extends React.Component {
                 value={this.props.deck.description}
                 onChange={this.handleChange}
               />
-              {/* {Object.keys(this.props.deck.cards).map((card, i) => {
-                return (
-                  <div className="and-card" key={card}>
-                    <h4>Card {i + 1} </h4>
-                    <label>Front:</label>
-                    <input
-                      type="text"
-                      name={card}
-                      value={this.props.deck.cards[card][0]}
-                      onChange={this.handleCardChange}
-                      data-side="0"
-                    />
-                    <label> Back: </label>
-                    <input
-                      type="text"
-                      name={card}
-                      value={this.props.deck.cards[card][1]}
-                      onChange={this.handleCardChange}
-                      data-side="1"
-                    />
-                  </div>
-                );
-              })} */}
+              {cardList}
             </form>
             <button className="new-card-button" onClick={this.submitNewCard}>
               + Card

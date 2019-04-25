@@ -20,28 +20,6 @@ class Decks extends React.Component {
 
   render() {
     const decks = this.props.decks;
-    const deckIds = Object.keys(decks);
-    // if (deckIds.length < 1) {
-    //   return (
-    //     <div className="no-decks-found">
-    //       <h2>No decks found.</h2>
-    //       <p>
-    //         It doesn't look like you've made any decks. Try creating your first
-    //         deck with the button below.
-    //       </p>
-    //       <div className="button-wrapper">
-    //         <button
-    //           className="create-deck"
-    //           onClick={() => {
-    //             this.props.toggleNewDeck();
-    //           }}
-    //         >
-    //           + New Deck
-    //         </button>
-    //       </div>
-    //     </div>
-    //   );
-    // }
 
     return (
       <div className="decks-wrap">
@@ -68,21 +46,22 @@ class Decks extends React.Component {
             </button>
           </form>
         </CSSTransition>
-        {deckIds.map(function(deckId) {
-          let deck = decks[deckId];
-          console.log(this.props.user);
+        {console.log(decks)}
+
+        {Array.from(decks).map(function(deck, i) {
+          console.log(deck);
 
           return (
             <Link
               to={{
-                pathname: `/${this.props.user}/${deckId}`,
+                pathname: `/${this.props.user}/${i}`,
                 state: {
                   deck: deck
                 }
               }}
-              key={deckId}
+              key={i}
             >
-              <div key={deckId} className="deck">
+              <div key={i} className="deck">
                 <h3>{deck.title}</h3>
                 <p>{deck.description}</p>
               </div>
