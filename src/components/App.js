@@ -1,23 +1,45 @@
 import React, { Component } from "react";
 import "../App.css";
 import Decks from "./Decks";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Deck from "./Deck";
 import base from "../base";
+import firebase from "firebase";
 // import AddNewDeck from "./AddNewDeck";
 
 class App extends Component {
   state = {
     user: "",
+    wrongUser: false,
     testProp: false,
     showNewDeck: false,
     decks: []
   };
+  authHandler = async authData => {
+    const userCards = await base.fetch(authData.user.uid, { context: this });
+    console.log(userCards.owner);
+    console.log(authData.user.uid);
+    if (
+      userCards.owner !== authData.user.uid ||
+      authData.user.uid !== this.props.match.params.user
+    ) {
+      console.log("wrong user");
+      this.setState({
+        wrongUser: true
+      });
+    }
+  };
   componentDidMount() {
     //   //check if logged in
-    console.log("component mounted");
+    firebase.auth().onAuthStateChanged(user => {
+      console.log("auth state change");
+      if (user) {
+        console.log(user);
+        this.authHandler({ user });
+      }
+    });
     let user = this.props.match.params.user;
-    this.ref = base.syncState(user, {
+    this.ref = base.syncState(`${user}/decks`, {
       context: this,
       state: "decks"
     });
@@ -46,7 +68,6 @@ class App extends Component {
     let decks = this.state.decks;
     if (newCard) {
       if (!decks[thisDeck]["cards"]) {
-        console.log("this returned like there was no cards");
         decks[thisDeck]["cards"] = [];
       }
       decks[thisDeck]["cards"][thisTarget] = [];
@@ -61,6 +82,9 @@ class App extends Component {
     });
   };
   render() {
+    if (this.state.wrongUser === true) {
+      return <Redirect to="/" />;
+    }
     return (
       <BrowserRouter>
         <div className="App">

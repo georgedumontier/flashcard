@@ -45,16 +45,13 @@ class AddNewCard extends React.Component {
     }
     let thisDeck = this.props.deckId;
     this.props.editCards(thisDeck, thisTarget, [" ", " "], "0", true);
-    //this.props.editCards(thisDeck, thisTarget, "", "1", false);
   };
   render() {
     let cardList;
-    console.log(this.props.deck);
     if (!this.props.deck.cards) {
       cardList = <div>There are no cards in this deck</div>;
     } else
       cardList = this.props.deck.cards.map((card, i) => {
-        console.log(card);
         return (
           <div className="and-card" key={i}>
             <h4>Card {i + 1} </h4>

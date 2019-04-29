@@ -46,11 +46,7 @@ class Decks extends React.Component {
             </button>
           </form>
         </CSSTransition>
-        {console.log(decks)}
-
         {Array.from(decks).map(function(deck, i) {
-          console.log(deck);
-
           return (
             <Link
               to={{
