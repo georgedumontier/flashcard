@@ -20,13 +20,12 @@ body {
   min-height: calc(100vh);
   width: 100%;
   height: 100%;
-  background-repeat: no-repeat;
-  background: var(--gradient);
+  /* background-repeat: no-repeat;
+  background: var(--gradient); */
   font-family: "Montserrat", sans-serif;
 }
 body {
   box-sizing: border-box;
-
   font-weight: 300;
 }
 h1 {
@@ -41,7 +40,8 @@ h3 {
   font-size: 2rem;
   font-weight: 300;
 }
-.App {
+.App,
+.login {
   position: relative;
   min-height: calc(100vh - 6rem);
   height: 100%;
@@ -51,19 +51,61 @@ h3 {
   max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
-  background: white;
+  background: var(--white);
 }
 .deck {
+  z-index: 2;
   padding: 5rem;
-  border: 3px solid gray;
+  position: relative;
+  /* border: 3px solid gray; */
   margin-bottom: 2rem;
   cursor: pointer;
+  background-image: linear-gradient(
+      180deg,
+      white 3rem,
+      #f0a4a4 calc(3rem),
+      #f0a4a4 calc(3rem + 2px),
+      transparent 1px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2.5rem,
+      #ddd 1px,
+      #ddd calc(2.5rem + 1px)
+    );
+  /* box-shadow: 1px 1px 3px grey, 13px 13px gray; */
 }
-.deck:hover {
-  box-shadow: 1px 3px 3px slategray;
-  transform: translateY(-1px);
-  transform: translateX(-1px);
+.deck,
+.deck::before,
+.deck::after {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.15);
 }
+.deck::before,
+.deck::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  /* border: 1px solid black; */
+}
+.deck::before {
+  left: 7px;
+  top: 5px;
+  z-index: -1;
+}
+.deck::after {
+  left: 12px;
+  top: 10px;
+  z-index: -2;
+}
+
+/* .deck:hover {
+  /* box-shadow: 1px 3px 3px slategray; */
+/* transform: translateY(-1px);
+  transform: translateX(-1px); */
+/* }  */
 .deck h3 {
   text-align: center;
 }
@@ -166,12 +208,13 @@ form.deck.new-deck-enter-done {
 /* DECK.JS StYLES */
 .card {
   width: 100%;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
   /* box-shadow: 1px 2px 2px gray; */
   font-size: 2.4rem;
   min-height: 250px;
   position: relative;
   transition: 0.5s all;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
 .cardIsFlipped {
   transform: rotateY(180deg);
@@ -186,6 +229,7 @@ form.deck.new-deck-enter-done {
   height: 100%;
   background: white;
   z-index: 2;
+  /* backface-visibility: none; */
 }
 .back-side {
   position: absolute;
@@ -195,6 +239,7 @@ form.deck.new-deck-enter-done {
   transform: rotateY(180deg);
   background: white;
   z-index: 1;
+  /* backface-visibility: none; */
 }
 .back-side > button {
   position: absolute;
@@ -203,6 +248,29 @@ form.deck.new-deck-enter-done {
   background: white;
   border: none;
   cursor: pointer;
+}
+.front-side,
+.back-side {
+  background-image: linear-gradient(
+      180deg,
+      white 3rem,
+      #f0a4a4 calc(3rem),
+      #f0a4a4 calc(3rem + 2px),
+      transparent 1px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2.5rem,
+      #ddd 1px,
+      #ddd calc(2.5rem + 1px)
+    );
+}
+.card h3 {
+  margin-top: 7rem;
+  line-height: 2.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .back-side > button.correct {
@@ -329,4 +397,22 @@ form.deck.new-deck-enter-done {
 .and-card {
   width: 100%;
   display: block;
+}
+.login {
+  background: var(--white);
+}
+.login h2,
+.login p {
+  text-align: center;
+}
+.github,
+.twitter,
+.facebook {
+  padding: 10px;
+  background: var(--gradient);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8rem;
+  display: block;
+  margin: 2rem auto;
+  cursor: pointer;
 }

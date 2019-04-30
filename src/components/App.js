@@ -17,25 +17,27 @@ class App extends Component {
   };
   authHandler = async authData => {
     const userCards = await base.fetch(authData.user.uid, { context: this });
-    console.log(userCards.owner);
-    console.log(authData.user.uid);
     if (
       userCards.owner !== authData.user.uid ||
       authData.user.uid !== this.props.match.params.user
     ) {
-      console.log("wrong user");
-      this.setState({
-        wrongUser: true
-      });
+      if (this.state.wrongUser !== true) {
+        this.setState({
+          wrongUser: true
+        });
+      }
     }
   };
   componentDidMount() {
     //   //check if logged in
     firebase.auth().onAuthStateChanged(user => {
-      console.log("auth state change");
       if (user) {
-        console.log(user);
         this.authHandler({ user });
+      }
+      if (!user) {
+        if (this.state.wrongUser !== true) {
+          this.setState({ wrongUser: true });
+        }
       }
     });
     let user = this.props.match.params.user;

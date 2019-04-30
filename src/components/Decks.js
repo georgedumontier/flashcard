@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import firebase from "firebase";
 // import Deck from "./Deck";
 
 class Decks extends React.Component {
@@ -16,6 +17,17 @@ class Decks extends React.Component {
     let target = e.target.name;
     let value = e.target.value;
     this.setState({ [target]: value });
+  };
+  logout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(
+        function() {},
+        function(err) {
+          console.error("sign out error", err);
+        }
+      );
   };
 
   render() {
@@ -74,6 +86,9 @@ class Decks extends React.Component {
             + New Deck
           </button>
         </div>
+        <button className="logout" onClick={() => this.logout()}>
+          Logout
+        </button>
       </div>
     );
   }
