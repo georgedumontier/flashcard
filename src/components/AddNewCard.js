@@ -54,7 +54,15 @@ class AddNewCard extends React.Component {
       cardList = this.props.deck.cards.map((card, i) => {
         return (
           <div className="and-card" key={i}>
-            <h4>Card {i + 1} </h4>
+            <h4>
+              <button
+                className="delete-card"
+                onClick={e => this.props.deleteCard(e, this.props.deckId, i)}
+              >
+                &times;
+              </button>
+              Card {i + 1}
+            </h4>
             <label>Front:</label>
             <input
               type="text"

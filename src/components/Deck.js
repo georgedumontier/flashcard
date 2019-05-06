@@ -42,7 +42,7 @@ class Deck extends React.Component {
       return <p>loading...</p>;
     }
     let cards;
-    if (!deck.cards) {
+    if (!deck.cards || deck.cards.length === 0) {
       cards = (
         <div className="no-cards">
           <p>No cards have been added to this deck.</p>
@@ -58,6 +58,7 @@ class Deck extends React.Component {
             </button>
           </div>
           <AddNewCard
+            deleteCard={this.props.deleteCard}
             inProp={this.state.showNewCard}
             hideNewCard={this.hideNewCard}
             editCards={this.props.editCards}
@@ -127,6 +128,7 @@ class Deck extends React.Component {
             </button>
           </div>
           <AddNewCard
+            deleteCard={this.props.deleteCard}
             inProp={this.state.showNewCard}
             hideNewCard={this.hideNewCard}
             editCards={this.props.editCards}

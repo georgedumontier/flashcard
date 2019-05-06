@@ -54,10 +54,7 @@ h3 {
   background: var(--white);
 }
 .deck {
-  z-index: 2;
   padding: 5rem;
-  position: relative;
-  /* border: 3px solid gray; */
   margin-bottom: 2rem;
   cursor: pointer;
   background-image: linear-gradient(
@@ -74,38 +71,10 @@ h3 {
       #ddd 1px,
       #ddd calc(2.5rem + 1px)
     );
-  /* box-shadow: 1px 1px 3px grey, 13px 13px gray; */
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25), 6px 6px white,
+    8px 8px 3px rgba(0, 0, 0, 0.25), 12px 12px white,
+    14px 14px 3px rgba(0, 0, 0, 0.25);
 }
-.deck,
-.deck::before,
-.deck::after {
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.15);
-}
-.deck::before,
-.deck::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #eee;
-  /* border: 1px solid black; */
-}
-.deck::before {
-  left: 7px;
-  top: 5px;
-  z-index: -1;
-}
-.deck::after {
-  left: 12px;
-  top: 10px;
-  z-index: -2;
-}
-
-/* .deck:hover {
-  /* box-shadow: 1px 3px 3px slategray; */
-/* transform: translateY(-1px);
-  transform: translateX(-1px); */
-/* }  */
 .deck h3 {
   text-align: center;
 }
@@ -205,11 +174,8 @@ form.deck.new-deck-enter-done {
   padding: 5rem;
 }
 
-/* DECK.JS StYLES */
 .card {
   width: 100%;
-  /* border: 2px solid gray; */
-  /* box-shadow: 1px 2px 2px gray; */
   font-size: 2.4rem;
   min-height: 250px;
   position: relative;
@@ -405,6 +371,16 @@ form.deck.new-deck-enter-done {
 .login p {
   text-align: center;
 }
+.logout {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--white);
+  color: darkred;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+}
 .github,
 .twitter,
 .facebook {
@@ -415,4 +391,16 @@ form.deck.new-deck-enter-done {
   display: block;
   margin: 2rem auto;
   cursor: pointer;
+}
+.delete-card {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+  top: -6px;
+  right: -8px;
+}
+.delete-card:hover {
+  color: darkred;
 }

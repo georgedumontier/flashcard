@@ -83,6 +83,17 @@ class App extends Component {
       decks
     });
   };
+  deleteCard = (e, deckNum, cardNum) => {
+    e.preventDefault();
+    console.log(deckNum);
+    console.log(cardNum);
+    let decks = this.state.decks;
+    delete decks[deckNum]["cards"][cardNum];
+    console.log(decks);
+    this.setState({
+      decks
+    });
+  };
   render() {
     if (this.state.wrongUser === true) {
       return <Redirect to="/" />;
@@ -113,6 +124,7 @@ class App extends Component {
                 editCards={this.editCards}
                 decks={this.state.decks}
                 user={this.state.user}
+                deleteCard={this.deleteCard}
                 {...props}
               />
             )}
