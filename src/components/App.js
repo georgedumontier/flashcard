@@ -60,6 +60,20 @@ class App extends Component {
     this.setState({ decks, showNewDeck: false });
   };
 
+  deleteDeck = (e, deckId) => {
+    e.preventDefault();
+    let box = window.confirm("Are you sure you want to delete this deck?");
+    if (box === true) {
+      let decks = this.state.decks;
+      delete decks[deckId];
+      this.setState({
+        decks
+      });
+    } else {
+      return false;
+    }
+  };
+
   toggleNewDeck = () => {
     let showNewDeck = !this.state.showNewDeck;
     this.setState({
@@ -113,6 +127,7 @@ class App extends Component {
                 editCards={this.editCards}
                 toggleNewDeck={this.toggleNewDeck}
                 user={this.state.user}
+                deleteDeck={this.deleteDeck}
               />
             )}
           />

@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
   faSkull,
-  faPencilAlt
+  faPencilAlt,
+  faArrowLeft
 } from "@fortawesome/free-solid-svg-icons";
 import AddNewCard from "./AddNewCard";
+import { Link } from "react-router-dom";
 
 class Deck extends React.Component {
   state = {
@@ -116,7 +118,11 @@ class Deck extends React.Component {
       <>
         <div className="deck-view-container">
           {cards}
+
           <div className="button-wrapper">
+            <Link className="back-button" to={`/${this.user}`}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Back
+            </Link>
             <button
               className="add-new-card-button"
               onClick={() => {

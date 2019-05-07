@@ -72,6 +72,12 @@ class Decks extends React.Component {
               <div key={i} className="deck">
                 <h3>{deck.title}</h3>
                 <p>{deck.description}</p>
+                <button
+                  className="delete-deck"
+                  onClick={e => this.props.deleteDeck(e, i)}
+                >
+                  &times;
+                </button>
               </div>
             </Link>
           );
