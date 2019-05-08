@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import firebase from "firebase";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Deck from "./Deck";
 
 class Decks extends React.Component {
@@ -93,7 +95,7 @@ class Decks extends React.Component {
           </button>
         </div>
         <button className="logout" onClick={() => this.logout()}>
-          Logout
+          Sign out <FontAwesomeIcon icon={faSignOutAlt} />
         </button>
       </div>
     );

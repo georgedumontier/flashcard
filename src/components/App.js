@@ -115,7 +115,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <h1>Flashcards are awesome!</h1>
           <Route
             exact
             path="/:user"

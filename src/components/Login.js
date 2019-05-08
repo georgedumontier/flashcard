@@ -73,7 +73,7 @@ class Login extends React.Component {
     }
     return (
       <div className="login">
-        <h2>Flashcards</h2>
+        <h2>Epic Flashcard App</h2>
         <div className="deck-view">
           <div
             className={`card ${
@@ -81,35 +81,39 @@ class Login extends React.Component {
             }`}
           >
             <div className="front-side" onClick={() => this.flipCard()}>
-              <button
-                className="github"
-                onClick={() => this.authenticate("Github")}
-              >
-                <FontAwesomeIcon icon={faGithub} />
-                <span> Login with Github</span>
-              </button>
-              <button
-                className="twitter"
-                onClick={() => this.authenticate("Twitter")}
-              >
-                <FontAwesomeIcon icon={faTwitter} />
-                <span> Log in with Twitter </span>
-              </button>
-              <button
-                className="facebook"
-                onClick={() => this.authenticate("Facebook")}
-              >
-                <FontAwesomeIcon icon={faFacebook} />
-                <span> Log in with Facebook</span>
-              </button>
-              {/* <Link to="/demo/">Demo time</Link> */}
+              <p>
+                Login with one of the methods below. <br />
+                Or click here to see a demo.
+              </p>
             </div>
             <div className="back-side" onClick={() => this.flipCard()}>
-              <h3>Please login with one of the methods below!</h3>
+              <p>Nice flip!</p>
               <button className="correct" />
               <button />
             </div>
           </div>
+          <button
+            className="github"
+            onClick={() => this.authenticate("Github")}
+          >
+            <FontAwesomeIcon icon={faGithub} />
+            <span> Login with Github</span>
+          </button>
+          <button
+            className="twitter"
+            onClick={() => this.authenticate("Twitter")}
+          >
+            <FontAwesomeIcon icon={faTwitter} />
+            <span> Log in with Twitter </span>
+          </button>
+          <button
+            className="facebook"
+            onClick={() => this.authenticate("Facebook")}
+          >
+            <FontAwesomeIcon icon={faFacebook} />
+            <span> Log in with Facebook</span>
+          </button>
+          {/* <Link to="/demo/">Demo time</Link> */}
         </div>
       </div>
     );

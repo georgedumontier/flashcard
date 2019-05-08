@@ -20,8 +20,12 @@ body {
   min-height: calc(100vh);
   width: 100%;
   height: 100%;
-  /* background-repeat: no-repeat;
-  background: var(--gradient); */
+  background-repeat: no-repeat;
+  background: linear-gradient(
+    to top right,
+    rgba(34, 193, 195, 0.1) 0%,
+    rgba(253, 187, 45, 0.1) 100%
+  );
   font-family: "Montserrat", sans-serif;
 }
 body {
@@ -51,11 +55,20 @@ h3 {
   max-width: 600px;
   margin: 0 auto;
   overflow-x: hidden;
-  background: var(--white);
+  /* background: var(--white); */
+  background: rgba(0, 0, 0, 0);
+  /* padding-top: 60px; */
+  /* background: blue; */
+}
+.decks-wrap {
+  margin-top: 60px;
 }
 .deck {
+  background: var(--white);
   position: relative;
-  padding: 5rem;
+  /* padding: 5rem; */
+  min-height: 250px;
+  font-size: 2.4rem;
   margin-bottom: 2rem;
   cursor: pointer;
   background-image: linear-gradient(
@@ -76,11 +89,20 @@ h3 {
     8px 8px 3px rgba(0, 0, 0, 0.25), 12px 12px white,
     14px 14px 3px rgba(0, 0, 0, 0.25);
 }
-.deck h3 {
+.deck h3,
+.deck > p,
+.login p {
   text-align: center;
+  font-size: 2.4rem;
+  margin-top: 2rem;
+  line-height: 2.4rem;
 }
-.deck p {
-  text-align: center;
+.login p {
+  padding-top: 6.4rem;
+  line-height: 5rem;
+}
+.deck h3 {
+  padding-top: 7.1rem;
 }
 a {
   text-decoration: none;
@@ -153,6 +175,9 @@ a {
 form.deck {
   display: none;
   transition: 0.3s all;
+  padding: 0.1rem;
+  /* max-height: 1000px; */
+  max-height: 0;
 }
 form.deck > * {
   font-size: 2rem;
@@ -163,27 +188,40 @@ form.deck > * {
   margin-top: 0.5rem;
 }
 form.deck > button {
-  background: white;
-  border: 2px solid black;
+  background: var(--gradient);
+  border: 1px solid black;
   padding: 1rem;
   cursor: pointer;
   font-size: 1.8rem;
+  margin-top: 2rem;
+}
+form.deck > button:hover {
+  color: var(--white);
 }
 form.deck.new-deck-enter {
   display: block;
-  padding: 0;
+  /* padding: 0; */
   max-height: 0;
   overflow: hidden;
 }
 form.deck.new-deck-enter-active {
   display: block;
   max-height: 1000px;
-  padding: 5rem;
 }
 form.deck.new-deck-enter-done {
   display: block;
   max-height: 1000px;
-  padding: 5rem;
+
+  /* margin-top: 5rem; */
+  /* padding: 5rem; */
+}
+form.deck > input:first-child {
+  margin-top: 4rem;
+}
+form.deck > input {
+  font-size: 2.4rem;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid var(--black);
 }
 
 .card {
@@ -391,7 +429,7 @@ form.deck.new-deck-enter-done {
   display: block;
 }
 .login {
-  background: var(--white);
+  background: none;
 }
 .login h2,
 .login p {
@@ -401,8 +439,8 @@ form.deck.new-deck-enter-done {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background: var(--white);
-  color: darkred;
+  background: none;
+  color: var(--black);
   box-shadow: none;
   border: none;
   cursor: pointer;
@@ -413,10 +451,13 @@ form.deck.new-deck-enter-done {
   padding: 10px;
   background: var(--gradient);
   font-family: "Montserrat", sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   display: block;
-  margin: 2rem auto;
+  margin: 1.5rem auto;
   cursor: pointer;
+}
+.github {
+  margin-top: 2rem;
 }
 .delete-card {
   background: none;
