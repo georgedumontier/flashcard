@@ -14,8 +14,33 @@ class Deck extends React.Component {
   state = {
     showNewCard: false,
     cardIsFlipped: false,
-    currentCard: 0
+    currentCard: 0,
+    right: 0,
+    wrong: 0
   };
+  convertToLetter(percentageGrade) {
+    if (percentageGrade > 94) {
+      return "A+";
+    } else if (percentageGrade > 89) {
+      return "A";
+    } else if (percentageGrade > 84) {
+      return "B+";
+    } else if (percentageGrade > 79) {
+      return "B";
+    } else if (percentageGrade > 74) {
+      return "C+";
+    } else if (percentageGrade > 69) {
+      return "C";
+    } else if (percentageGrade > 64) {
+      return "D+";
+    } else if (percentageGrade > 59) {
+      return "D";
+    } else if (percentageGrade < 60) {
+      return "F";
+    } else {
+      return "";
+    }
+  }
   flipCard = () => {
     let cardIsFlipped = !this.state.cardIsFlipped;
     this.setState({
@@ -23,6 +48,17 @@ class Deck extends React.Component {
     });
   };
   answered = answer => {
+    if (answer === "right") {
+      let right = this.state.right + 1;
+      this.setState({
+        right
+      });
+    } else {
+      let wrong = this.state.wrong + 1;
+      this.setState({
+        wrong
+      });
+    }
     let currentCard = this.state.currentCard;
     currentCard++;
     let cardIsFlipped = !this.state.cardIsFlipped;
@@ -70,9 +106,18 @@ class Deck extends React.Component {
         </div>
       );
     } else if (deck.cards && this.state.currentCard === deck.cards.length) {
+      let percentageGrade = Math.floor(
+        (this.state.right / this.state.currentCard) * 100
+      );
+      let letterGrade = this.convertToLetter(percentageGrade);
+      console.log(letterGrade);
       return (
         <div className="results">
-          <h1>These are your results: You fail!</h1>
+          <h2>Results</h2>
+          <h2>You answered {percentageGrade}% ofthe cards correctly.</h2>
+          <div className="letterGrade">
+            <h2>{letterGrade}</h2>
+          </div>
         </div>
       );
     } else {
@@ -98,11 +143,11 @@ class Deck extends React.Component {
                     <h3>{deck.cards[`${this.state.currentCard}`][1]}</h3>
                     <button
                       className="correct"
-                      onClick={() => this.answered("right")}
+                      onClick={() => this.answered("wrong")}
                     >
                       <FontAwesomeIcon icon={faSkull} size="3x" />
                     </button>
-                    <button onClick={() => this.answered("wrong")}>
+                    <button onClick={() => this.answered("right")}>
                       <FontAwesomeIcon icon={faCheck} size="3x" />
                     </button>
                   </div>
