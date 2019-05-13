@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import firebase from "firebase";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import Deck from "./Deck";
 
-class Decks extends React.Component {
+class DecksDemo extends React.Component {
   state = {
     Title: "Title",
     Description: "Description"
@@ -21,15 +20,8 @@ class Decks extends React.Component {
     this.setState({ [target]: value });
   };
   logout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(
-        function() {},
-        function(err) {
-          console.error("sign out error", err);
-        }
-      );
+    this.props.history.push("/");
+    window.location.reload();
   };
 
   render() {
@@ -104,4 +96,4 @@ class Decks extends React.Component {
   }
 }
 
-export default Decks;
+export default withRouter(DecksDemo);

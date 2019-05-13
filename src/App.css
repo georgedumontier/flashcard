@@ -26,7 +26,7 @@ body {
     rgba(34, 193, 195, 0.1) 0%,
     rgba(253, 187, 45, 0.1) 100%
   ); */
-  background:rgb(250,255,255);
+  background: rgb(243, 247, 248);
   font-family: "Montserrat", sans-serif;
 }
 body {
@@ -102,6 +102,10 @@ h3 {
   padding-top: 6.4rem;
   line-height: 5rem;
 }
+.login .login-demo {
+  padding: 0;
+  font-size: 1.8rem;
+}
 .deck h3 {
   padding-top: 7.1rem;
 }
@@ -115,9 +119,14 @@ a {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding-top:1.5rem;
-  padding-bottom:1.5rem;
-  margin-left:-30px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  /* margin-left: -30px; */
+}
+@media (max-width: 620px) {
+  .button-wrapper {
+    margin-left: -30px;
+  }
 }
 .create-deck,
 .add-new-card-button,
@@ -136,9 +145,9 @@ a {
   font-family: "Montserrat", sans-serif;
 }
 .back-button {
-  float:left;
-  margin-left:3rem;
-  font-size:1.5rem;
+  float: left;
+  margin-left: 3rem;
+  font-size: 1.5rem;
 }
 .back-button:hover {
   color: var(--white);
@@ -147,15 +156,16 @@ a {
   display: block;
   width: 50%;
   margin: 0 auto;
-  margin-top: 15px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-.create-deck{
-  float:right;
-  margin:1rem;
+.create-deck {
+  float: right;
+  margin: 1rem;
 }
-.add-new-card-button{
-  margin-right:3rem;
-  float:right;
+.add-new-card-button {
+  margin-right: 3rem;
+  float: right;
 }
 .create-deck:hover,
 .add-new-card-button:hover {
@@ -167,16 +177,15 @@ a {
 }
 .and-close-button {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 3rem;
+  top: 1px;
+  right: 1px;
+  padding: 1rem;
   color: black;
   background: white;
   text-align: center;
-  line-height: 3rem;
+  font-size: 1.5rem;
   cursor: pointer;
+  font-family: "Montserrat", sans-serif;
 }
 .and-close-button:hover {
   background: black;
@@ -236,8 +245,8 @@ form.deck > input:first-child {
   margin-top: 6.4rem;
 }
 form.deck > input {
-  margin-top:1.8rem;
-  padding:0.2rem;
+  margin-top: 1.8rem;
+  padding: 0.2rem;
   font-size: 2.4rem;
   font-family: "Montserrat", sans-serif;
   border: 1px solid var(--black);
@@ -276,10 +285,10 @@ form.deck > input {
   z-index: 1;
   /* backface-visibility: none; */
 }
-.answer-container{
-  position:absolute;
-  bottom:0;
-  width:100%;
+.answer-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 .answer-container > button {
   background: white;
@@ -287,10 +296,10 @@ form.deck > input {
   cursor: pointer;
 }
 .answer-container button.incorrect {
-  float:left;
+  float: left;
 }
 .answer-container button.correct {
-  float:right;
+  float: right;
 }
 .front-side,
 .back-side {
@@ -315,8 +324,6 @@ form.deck > input {
   padding-left: 3rem;
   padding-right: 3rem;
 }
-
-
 
 /* TRANSITIONS */
 .new-deck-wrapper {
@@ -349,10 +356,10 @@ form.deck > input {
   background: none;
   cursor: pointer;
   border-radius: 3rem;
-  width:3rem;
-  height:3rem;
-  line-height:3rem;
-  padding:0;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0;
 }
 .delete-deck:hover {
   background: var(--black);
@@ -371,9 +378,10 @@ form.deck > input {
   width: 100%;
   height: 100%;
 }
-.and-card h4{
-  margin-bottom:0;
-  position:relative;
+.and-card h4 {
+  margin: 0;
+  margin-bottom: 1rem;
+  position: relative;
 }
 .and-spacer {
   width: 15%;
@@ -383,7 +391,7 @@ form.deck > input {
 }
 .add-new-card,
 .close-new-card {
-  padding: 2rem;
+  padding: 0;
   border: 3px solid gray;
   width: 85%;
   background: white;
@@ -411,7 +419,7 @@ form.deck > input {
   /* position: relative; */
   padding: 5px;
   height: 100%;
-  margin-top:60px;
+  margin-top: 60px;
 }
 .deck-view {
   transition: 0.3s all;
@@ -442,34 +450,55 @@ form.deck > input {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   padding: 5px;
-  margin: 3px;
-  margin-top: 2px;
+  width: calc(100% - 2rem);
   font-size: 2rem;
-  display: inline-block;
-  min-width: 65%;
-  border: 1px solid var(--black);
+  display: block;
+  border: 1px solid gray;
+  margin-bottom: 1rem;
+}
+.add-new-card form .and-title {
+  font-weight: 600;
 }
 .add-new-card form label {
   padding: 5px;
+  padding-left: 0;
   margin-top: 3px;
-  float: left;
-  text-align: right;
-  margin-right: 10px;
-  width: 20%;
+  margin-bottom: 1rem;
   font-size: 2rem;
+  font-weight: 400;
 }
-@media(max-width:450px){
-  .add-new-card form label{
-    text-align:left;
+
+@media (max-width: 600px) {
+  .add-new-card form label {
+    display: block;
+    text-align: left;
+    float: none;
+  }
+  .add-new-card input {
+    display: block;
+  }
+}
+@media (max-width: 450px) {
+  .add-new-card form label {
+    text-align: left;
   }
 }
 .and-card {
+  box-sizing: border-box;
   width: 100%;
+  padding: 2rem 1rem 2rem 1rem;
   display: block;
-  padding:5px;
+  background: var(--white);
+  /* padding: 5px; */
   /* background:rgb(250,250,255); */
-  box-shadow:1px 2px #aaa;
-  margin-bottom:3rem;
+  /* box-shadow: 1px 2px #aaa; */
+  /* margin-bottom: 3rem; */
+}
+.title-and-description {
+  padding: 2rem 1rem 2rem 1rem;
+}
+.and-card:nth-child(even) {
+  background: rgb(243, 247, 248);
 }
 .login {
   background: none;
@@ -479,9 +508,10 @@ form.deck > input {
   text-align: center;
 }
 .logout {
-  float:left;
-  padding:1rem;
-  margin:1rem;
+  float: left;
+  padding: 1rem;
+  padding-left: 0;
+  margin: 1rem;
   background: none;
   color: var(--black);
   box-shadow: none;
@@ -511,13 +541,25 @@ form.deck > input {
   margin-top: 2rem;
 }
 .delete-card {
-  position:absolute;
-  top:-15px;
-  left:-17px;
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1rem;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
   cursor: pointer;
+  top: -10px;
+  right: 0;
+  padding: 0;
+  /* float: right; */
+  position: absolute;
+  text-align: center;
+  /* top: -10px; */
+  border-radius: 3rem;
+}
+.delete-card:hover {
+  background: var(--black);
+  color: var(--white);
 }
 
 button {
@@ -531,29 +573,30 @@ button {
   text-align: center;
 }
 .letterGrade h2 {
-  display:inline-block;
+  display: inline-block;
   font-weight: 600;
   font-size: 6rem;
   margin: 0 auto;
-  padding:7rem;
+  padding: 7rem;
   background: var(--gradient);
 }
-.done-buttons-wrapper{
-  width:80%;
-  margin:0 auto;
-  margin-top:4rem;
-
+.done-buttons-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 4rem;
 }
-.retry{
- float:right;
+.retry {
+  float: right;
 }
 
-@media(max-width:500px){
-  .card{
-    min-height:200px;
+@media (max-width: 500px) {
+  .card {
+    min-height: 200px;
   }
-  .deck{min-height:200px;}
-  .login p{
-    padding-top:4rem;
+  .deck {
+    min-height: 200px;
+  }
+  .login p {
+    padding-top: 4rem;
   }
 }

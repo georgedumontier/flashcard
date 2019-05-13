@@ -9,6 +9,7 @@ import {
   faHome,
   faRedo
 } from "@fortawesome/free-solid-svg-icons";
+import { withRouter } from "react-router";
 import AddNewCard from "./AddNewCard";
 import { Link } from "react-router-dom";
 
@@ -75,7 +76,7 @@ class Deck extends React.Component {
       showNewCard: false
     });
   };
-  restart = (e) => {
+  restart = e => {
     e.preventDefault();
     let state = this.state;
     state.right = 0;
@@ -85,8 +86,7 @@ class Deck extends React.Component {
     this.setState({
       state
     });
-
-  }
+  };
   render() {
     let deckId = this.props.match.params.deckId;
     let deck = this.props.decks[deckId];
@@ -129,11 +129,19 @@ class Deck extends React.Component {
           <h1>Results</h1>
           <h2>You answered {percentageGrade}% of the cards correctly.</h2>
           <div className="letterGrade">
-            <div className="grade-container"><h2>{letterGrade}</h2></div>
+            <div className="grade-container">
+              <h2>{letterGrade}</h2>
+            </div>
           </div>
           <div className="done-buttons-wrapper">
-          <Link to={`/${this.props.user}`}><button className="back-home"><FontAwesomeIcon icon={faHome}></FontAwesomeIcon> Home</button></Link>
-          <button className="retry" onClick={(e)=>this.restart(e)}><FontAwesomeIcon icon={faRedo}></FontAwesomeIcon> Retry</button>
+            <Link to={`/${this.props.user}`}>
+              <button className="back-home">
+                <FontAwesomeIcon icon={faHome} /> Home
+              </button>
+            </Link>
+            <button className="retry" onClick={e => this.restart(e)}>
+              <FontAwesomeIcon icon={faRedo} /> Retry
+            </button>
           </div>
         </div>
       );
@@ -165,7 +173,10 @@ class Deck extends React.Component {
                       >
                         <FontAwesomeIcon icon={faTimes} size="2x" />
                       </button>
-                      <button className="correct" onClick={() => this.answered("right")}>
+                      <button
+                        className="correct"
+                        onClick={() => this.answered("right")}
+                      >
                         <FontAwesomeIcon icon={faCheck} size="2x" />
                       </button>
                     </div>
@@ -211,4 +222,4 @@ class Deck extends React.Component {
   }
 }
 
-export default Deck;
+export default withRouter(Deck);

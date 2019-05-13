@@ -1,13 +1,9 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import base, { firebaseApp } from "../base";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGithub,
-  faTwitter,
-  faFacebook
-} from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 class Login extends React.Component {
   _isMounted = null;
@@ -73,7 +69,13 @@ class Login extends React.Component {
     }
     return (
       <div className="login">
-        <h2>Epic Flashcard App</h2>
+        <h2>
+          Fla
+          <span role="img" aria-label="lightning bolt acting as letter 'S'">
+            ⚡
+          </span>
+          hcard
+        </h2>
         <div className="deck-view">
           <div
             className={`card ${
@@ -81,14 +83,10 @@ class Login extends React.Component {
             }`}
           >
             <div className="front-side" onClick={() => this.flipCard()}>
-              <p>
-                Login with one of the methods below.
-              </p>
+              <p>Login with one of the methods below.</p>
             </div>
             <div className="back-side" onClick={() => this.flipCard()}>
               <p>Nice flip!</p>
-              <button className="correct" />
-              <button />
             </div>
           </div>
           <button
@@ -96,15 +94,15 @@ class Login extends React.Component {
             onClick={() => this.authenticate("Github")}
           >
             <FontAwesomeIcon icon={faGithub} />
-            <span> Login with Github</span>
+            <span> Log in with Github</span>
           </button>
-          <button
+          {/* <button
             className="twitter"
             onClick={() => this.authenticate("Twitter")}
           >
             <FontAwesomeIcon icon={faTwitter} />
             <span> Log in with Twitter </span>
-          </button>
+          </button> */}
           <button
             className="facebook"
             onClick={() => this.authenticate("Facebook")}
@@ -112,7 +110,9 @@ class Login extends React.Component {
             <FontAwesomeIcon icon={faFacebook} />
             <span> Log in with Facebook</span>
           </button>
-          {/* <Link to="/demo/">Demo time</Link> */}
+          <Link to={"/demo"}>
+            <p className="login-demo">Or click here to see a demo</p>
+          </Link>
         </div>
       </div>
     );

@@ -55,13 +55,13 @@ class AddNewCard extends React.Component {
         return (
           <div className="and-card" key={i}>
             <h4>
+              Card {i + 1}
               <button
                 className="delete-card"
                 onClick={e => this.props.deleteCard(e, this.props.deckId, i)}
               >
                 &times;
               </button>
-              Card {i + 1}
             </h4>
             <label>Front:</label>
             <input
@@ -96,21 +96,23 @@ class AddNewCard extends React.Component {
           />
           <div className="add-new-card">
             <form>
-              <label>Title:</label>
-              <input
-                className="title-form"
-                name="title"
-                type="text"
-                value={this.props.deck.title}
-                onChange={this.handleChange}
-              />
-              <label>Description:</label>
-              <textarea
-                name="description"
-                type="text"
-                value={this.props.deck.description}
-                onChange={this.handleChange}
-              />
+              <div className="title-and-description">
+                <label className="and-title">Title:</label>
+                <input
+                  className="title-form"
+                  name="title"
+                  type="text"
+                  value={this.props.deck.title}
+                  onChange={this.handleChange}
+                />
+                <label className="and-title">Description:</label>
+                <textarea
+                  name="description"
+                  type="text"
+                  value={this.props.deck.description}
+                  onChange={this.handleChange}
+                />
+              </div>
               {cardList}
             </form>
             <button className="new-card-button" onClick={this.submitNewCard}>
@@ -121,7 +123,7 @@ class AddNewCard extends React.Component {
               className="and-close-button"
               onClick={() => this.props.hideNewCard()}
             >
-              &times;
+              close
             </div>
           </div>
         </div>
