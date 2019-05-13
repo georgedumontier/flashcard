@@ -21,11 +21,12 @@ body {
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to top right,
     rgba(34, 193, 195, 0.1) 0%,
     rgba(253, 187, 45, 0.1) 100%
-  );
+  ); */
+  background:rgb(250,255,255);
   font-family: "Montserrat", sans-serif;
 }
 body {
@@ -114,14 +115,16 @@ a {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  text-align: right;
-  left: 0;
-  right: 0;
+  padding-top:1.5rem;
+  padding-bottom:1.5rem;
+  margin-left:-30px;
 }
 .create-deck,
 .add-new-card-button,
 .new-card-button,
-.back-button {
+.back-button,
+.retry,
+.back-home {
   background: var(--gradient);
   border: 1px solid var(--black);
   margin-top: 1rem;
@@ -133,10 +136,9 @@ a {
   font-family: "Montserrat", sans-serif;
 }
 .back-button {
-  position: absolute;
-  /* margin-left: 1rem; */
-  margin-top: 1rem;
-  left: 1rem;
+  float:left;
+  margin-left:3rem;
+  font-size:1.5rem;
 }
 .back-button:hover {
   color: var(--white);
@@ -146,6 +148,14 @@ a {
   width: 50%;
   margin: 0 auto;
   margin-top: 15px;
+}
+.create-deck{
+  float:right;
+  margin:1rem;
+}
+.add-new-card-button{
+  margin-right:3rem;
+  float:right;
 }
 .create-deck:hover,
 .add-new-card-button:hover {
@@ -223,9 +233,11 @@ form.deck.new-deck-exit-active {
   height: 0;
 }
 form.deck > input:first-child {
-  margin-top: 4rem;
+  margin-top: 6.4rem;
 }
 form.deck > input {
+  margin-top:1.8rem;
+  padding:0.2rem;
   font-size: 2.4rem;
   font-family: "Montserrat", sans-serif;
   border: 1px solid var(--black);
@@ -264,13 +276,21 @@ form.deck > input {
   z-index: 1;
   /* backface-visibility: none; */
 }
-.back-side > button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+.answer-container{
+  position:absolute;
+  bottom:0;
+  width:100%;
+}
+.answer-container > button {
   background: white;
   border: none;
   cursor: pointer;
+}
+.answer-container button.incorrect {
+  float:left;
+}
+.answer-container button.correct {
+  float:right;
 }
 .front-side,
 .back-side {
@@ -290,15 +310,13 @@ form.deck > input {
     );
 }
 .card h3 {
-  margin-top: 7rem;
+  margin-top: 4.6rem;
   line-height: 2.5rem;
   padding-left: 3rem;
   padding-right: 3rem;
 }
 
-.back-side > button.correct {
-  left: 5px;
-}
+
 
 /* TRANSITIONS */
 .new-deck-wrapper {
@@ -329,9 +347,12 @@ form.deck > input {
   right: 1rem;
   border: none;
   background: none;
-  font-size: 1.8rem;
   cursor: pointer;
-  border-radius: 100%;
+  border-radius: 3rem;
+  width:3rem;
+  height:3rem;
+  line-height:3rem;
+  padding:0;
 }
 .delete-deck:hover {
   background: var(--black);
@@ -349,6 +370,10 @@ form.deck > input {
   overflow: hidden;
   width: 100%;
   height: 100%;
+}
+.and-card h4{
+  margin-bottom:0;
+  position:relative;
 }
 .and-spacer {
   width: 15%;
@@ -386,6 +411,7 @@ form.deck > input {
   /* position: relative; */
   padding: 5px;
   height: 100%;
+  margin-top:60px;
 }
 .deck-view {
   transition: 0.3s all;
@@ -421,6 +447,7 @@ form.deck > input {
   font-size: 2rem;
   display: inline-block;
   min-width: 65%;
+  border: 1px solid var(--black);
 }
 .add-new-card form label {
   padding: 5px;
@@ -431,9 +458,18 @@ form.deck > input {
   width: 20%;
   font-size: 2rem;
 }
+@media(max-width:450px){
+  .add-new-card form label{
+    text-align:left;
+  }
+}
 .and-card {
   width: 100%;
   display: block;
+  padding:5px;
+  /* background:rgb(250,250,255); */
+  box-shadow:1px 2px #aaa;
+  margin-bottom:3rem;
 }
 .login {
   background: none;
@@ -443,9 +479,9 @@ form.deck > input {
   text-align: center;
 }
 .logout {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  float:left;
+  padding:1rem;
+  margin:1rem;
   background: none;
   color: var(--black);
   box-shadow: none;
@@ -475,30 +511,49 @@ form.deck > input {
   margin-top: 2rem;
 }
 .delete-card {
+  position:absolute;
+  top:-15px;
+  left:-17px;
   background: none;
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  position: relative;
-  top: -6px;
-  right: -8px;
 }
-.delete-card:hover {
-  color: darkred;
-}
+
 button {
   font-size: 1.5rem !important;
   padding: 0.8rem;
 }
 .letterGrade {
-  padding: 5rem;
+  /* padding: 5rem; */
   margin: 0 auto;
-  background: var(--gradient);
-  display: inline-block;
+  display: block;
   text-align: center;
 }
 .letterGrade h2 {
+  display:inline-block;
   font-weight: 600;
   font-size: 6rem;
-  margin: 0;
+  margin: 0 auto;
+  padding:7rem;
+  background: var(--gradient);
+}
+.done-buttons-wrapper{
+  width:80%;
+  margin:0 auto;
+  margin-top:4rem;
+
+}
+.retry{
+ float:right;
+}
+
+@media(max-width:500px){
+  .card{
+    min-height:200px;
+  }
+  .deck{min-height:200px;}
+  .login p{
+    padding-top:4rem;
+  }
 }

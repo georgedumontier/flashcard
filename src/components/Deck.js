@@ -3,9 +3,11 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
-  faSkull,
+  faTimes,
   faPencilAlt,
-  faArrowLeft
+  faArrowLeft,
+  faHome,
+  faRedo
 } from "@fortawesome/free-solid-svg-icons";
 import AddNewCard from "./AddNewCard";
 import { Link } from "react-router-dom";
@@ -73,6 +75,18 @@ class Deck extends React.Component {
       showNewCard: false
     });
   };
+  restart = (e) => {
+    e.preventDefault();
+    let state = this.state;
+    state.right = 0;
+    state.wrong = 0;
+    state.cardIsFlipped = false;
+    state.currentCard = 0;
+    this.setState({
+      state
+    });
+
+  }
   render() {
     let deckId = this.props.match.params.deckId;
     let deck = this.props.decks[deckId];
@@ -110,13 +124,16 @@ class Deck extends React.Component {
         (this.state.right / this.state.currentCard) * 100
       );
       let letterGrade = this.convertToLetter(percentageGrade);
-      console.log(letterGrade);
       return (
         <div className="results">
-          <h2>Results</h2>
-          <h2>You answered {percentageGrade}% ofthe cards correctly.</h2>
+          <h1>Results</h1>
+          <h2>You answered {percentageGrade}% of the cards correctly.</h2>
           <div className="letterGrade">
-            <h2>{letterGrade}</h2>
+            <div className="grade-container"><h2>{letterGrade}</h2></div>
+          </div>
+          <div className="done-buttons-wrapper">
+          <Link to={`/${this.props.user}`}><button className="back-home"><FontAwesomeIcon icon={faHome}></FontAwesomeIcon> Home</button></Link>
+          <button className="retry" onClick={(e)=>this.restart(e)}><FontAwesomeIcon icon={faRedo}></FontAwesomeIcon> Retry</button>
           </div>
         </div>
       );
@@ -141,15 +158,17 @@ class Deck extends React.Component {
                   </div>
                   <div className="back-side">
                     <h3>{deck.cards[`${this.state.currentCard}`][1]}</h3>
-                    <button
-                      className="correct"
-                      onClick={() => this.answered("wrong")}
-                    >
-                      <FontAwesomeIcon icon={faSkull} size="3x" />
-                    </button>
-                    <button onClick={() => this.answered("right")}>
-                      <FontAwesomeIcon icon={faCheck} size="3x" />
-                    </button>
+                    <div className="answer-container">
+                      <button
+                        className="incorrect"
+                        onClick={() => this.answered("wrong")}
+                      >
+                        <FontAwesomeIcon icon={faTimes} size="2x" />
+                      </button>
+                      <button className="correct" onClick={() => this.answered("right")}>
+                        <FontAwesomeIcon icon={faCheck} size="2x" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -165,7 +184,7 @@ class Deck extends React.Component {
           {cards}
 
           <div className="button-wrapper">
-            <Link className="back-button" to={`/${this.user}`}>
+            <Link className="back-button" to={`/${this.props.user}`}>
               <FontAwesomeIcon icon={faArrowLeft} /> Back
             </Link>
             <button

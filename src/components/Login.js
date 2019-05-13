@@ -82,8 +82,7 @@ class Login extends React.Component {
           >
             <div className="front-side" onClick={() => this.flipCard()}>
               <p>
-                Login with one of the methods below. <br />
-                Or click here to see a demo.
+                Login with one of the methods below.
               </p>
             </div>
             <div className="back-side" onClick={() => this.flipCard()}>

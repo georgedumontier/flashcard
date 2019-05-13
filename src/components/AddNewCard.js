@@ -71,7 +71,7 @@ class AddNewCard extends React.Component {
               onChange={this.handleCardChange}
               data-side="0"
             />
-            <label> Back: </label>
+            <label>Back:</label>
             <input
               type="text"
               name={i}
@@ -96,7 +96,6 @@ class AddNewCard extends React.Component {
           />
           <div className="add-new-card">
             <form>
-              {/* <FontAwesomeIcon className="pencil-icon" icon={faPencilAlt} /> */}
               <label>Title:</label>
               <input
                 className="title-form"

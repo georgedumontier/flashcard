@@ -93,10 +93,11 @@ class Decks extends React.Component {
           >
             + New Deck
           </button>
-        </div>
-        <button className="logout" onClick={() => this.logout()}>
+          <button className="logout" onClick={() => this.logout()}>
           Sign out <FontAwesomeIcon icon={faSignOutAlt} />
         </button>
+        </div>
+
       </div>
     );
   }
